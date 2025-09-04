@@ -1,0 +1,128 @@
+
+@use 'variables' as *; // SCSS module import (Dart Sass syntax)
+
+// Base theme block
+.theme {
+  font-family: $font-primary;
+  background-color: $bg-primary;
+
+  // Modifiers for swapping tokens
+  &--font-main {
+    font-family: $font-primary;
+  }
+
+  &--bg-main {
+    background-color: $bg-primary;
+  }
+}
+
+//Heading
+
+@mixin font-heading1-light {
+    /* Heading 1/Light */
+    font-family: $font-primary;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: 1.5px;
+    color: $color-primary;
+}
+
+//Paragraph
+
+@mixin font-body-regular {
+    /* Body/Regular */
+    font-family: $font-primary;
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 1.43;
+    letter-spacing: normal;
+    color: $color-primary
+}
+
+@mixin font-body-bold {
+    /* Body/Bold */
+    font-family: $font-primary;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 1.43;
+    letter-spacing: normal;
+    color: $color-primary;
+}
+
+@mixin font-caption-normal {
+    /* Caption/Normal */
+    font-family: $font-primary;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 1.4;
+    letter-spacing: normal;
+    color: $color-accent
+}
+
+h1,
+.h1 {
+    @include font-heading1-light;
+}
+
+p{
+    @include font-body-regular;
+
+    &.p--bold {
+        @include font-body-bold;
+    }
+
+    &.p--caption {
+        @include font-caption-normal;
+    }
+}
+
+// gellery
+
+.gallery {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+
+  &__images {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__column {
+    &--left {
+      flex-shrink: 0;
+
+      img {
+        width: 372px;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+    }
+
+    &--right {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      img {
+        width: 372px;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__content {
+    max-width: 500px;
+
+    &-heading {
+      margin-top: 0;
+    
+    }
+
+  }
+}

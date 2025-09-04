@@ -1,0 +1,24 @@
+{
+  "gallery": {
+    "images": {
+      "left": {
+        "src": "assets/img/vertical.jpg",
+        "alt": "Tall vertical showcase image"
+      },
+      "right": [
+        {
+          "src": "assets/img/top.jpg",
+          "alt": "Top right supporting image"
+        },
+        {
+          "src": "assets/img/bottom.jpg",
+          "alt": "Bottom right supporting image"
+        }
+      ]
+    },
+    "content": {
+      "heading": "Gallery Heading from CMS",
+      "paragraph": "This paragraph is managed in the CMS. It can describe the gallery, provide context for the images, or tell a story that connects the visuals to the brand message."
+    }
+  }
+}
