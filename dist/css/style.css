@@ -21,7 +21,7 @@ a {
 }
 a:hover, a:focus {
   color: #fff;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:active {
   color: rgb(229.5, 229.5, 229.5);
@@ -298,7 +298,6 @@ p.p--caption {
   }
 }
 
-/* Modal overlay */
 .modal {
   display: none;
   position: fixed;
@@ -312,18 +311,52 @@ p.p--caption {
   align-items: center;
   justify-content: center;
   padding: 16px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
 .modal.is-active {
   display: flex;
+  animation: modalFadeIn 0.3s ease forwards;
+}
+
+.modal.is-closing {
+  animation: modalFadeOut 0.3s ease forwards;
 }
 
 .modal__content {
   max-width: 90%;
   max-height: 80%;
-  border-radius: 4px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   object-fit: contain;
+  transform: translateY(-10px);
+  transition: transform 0.3s ease;
+}
+
+.modal.is-active .modal__content {
+  transform: translateY(0);
 }
 
 .modal__close {
@@ -336,6 +369,11 @@ p.p--caption {
   cursor: pointer;
   user-select: none;
   z-index: 10000;
+  transition: transform 0.2s ease;
+}
+
+.modal__close:hover {
+  transform: rotate(90deg) scale(1.1);
 }
 
 /* Tablet adjustments */
@@ -377,7 +415,6 @@ p.p--caption {
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
-  padding-bottom: 16px;
   position: relative;
   display: block;
   cursor: pointer;
@@ -427,13 +464,10 @@ p.p--caption {
   cursor: pointer;
   position: relative;
 }
-.card-block__card:hover {
-  background-color: #ffffff;
-}
 .card-block__card:hover .card-heading,
 .card-block__card:hover .card-paragraph {
-  color: #000000;
-  background-color: #ffffff;
+  color: #000;
+  background-color: #fff;
 }
 .card-block__card-image {
   position: relative;
@@ -464,9 +498,6 @@ p.p--caption {
 .card-block__card-image:hover::after, .card-block__card-image:active::after {
   opacity: 1;
 }
-.card-block__card-image.is-hover::after, .card-block__card-image.is-active::after {
-  background-color: red;
-}
 .card-block__card .card-heading {
   position: relative;
   display: inline-block;
@@ -479,10 +510,6 @@ p.p--caption {
   left: 0;
   height: 2px;
   width: 0;
-  background-color: white;
+  background-color: #fff;
   transition: width 0.3s ease-in-out;
-}
-.card-block__card .card-heading.is-hover::after, .card-block__card .card-heading.is-active::after {
-  background-color: red;
-  width: 100%;
 }

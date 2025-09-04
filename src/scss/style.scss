@@ -64,19 +64,19 @@
 }
 
 a {
-  color: $color-primary;
-  text-decoration: none;
-  transition: color 0.3s ease, text-decoration 0.3s ease;
-
-  &:hover,
-  &:focus {
     color: $color-primary;
-    text-decoration: underline;
-  }
+    text-decoration: none;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 
-  &:active {
-    color: darken($color-primary, 10%);
-  }
+    &:hover,
+    &:focus {
+        color: $color-primary;
+        text-decoration: none;
+    }
+
+    &:active {
+        color: darken($color-primary, 10%);
+    }
 }
 
 
@@ -298,9 +298,8 @@ $spaces: (
     }
 }
 
-/* Modal overlay */
 .modal {
-    display: none;
+    display: none; // hidden by default
     position: fixed;
     z-index: 9999;
     left: 0;
@@ -312,30 +311,76 @@ $spaces: (
     align-items: center;
     justify-content: center;
     padding: 16px;
+
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+// Fade-in animation
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+// Fade-out animation
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
 }
 
 .modal.is-active {
     display: flex;
+    animation: modalFadeIn 0.3s ease forwards;
+}
+
+.modal.is-closing {
+    animation: modalFadeOut 0.3s ease forwards;
 }
 
 .modal__content {
     max-width: 90%;
     max-height: 80%;
-    border-radius: 4px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     object-fit: contain;
+    transform: translateY(-10px);
+    transition: transform 0.3s ease;
+}
+
+.modal.is-active .modal__content {
+    transform: translateY(0);
 }
 
 .modal__close {
     position: absolute;
     top: 48px;
     right: 48px;
-    color: #fff;
+    color: $color-primary;
     font-size: 32px;
     font-weight: bold;
     cursor: pointer;
     user-select: none;
     z-index: 10000;
+    transition: transform 0.2s ease;
+}
+
+.modal__close:hover {
+    transform: rotate(90deg) scale(1.1);
 }
 
 /* Tablet adjustments */
@@ -351,6 +396,7 @@ $spaces: (
         right: 16px;
     }
 }
+
 
 /* Mobile adjustments (320px – 480px) */
 @media (min-width: 320px) and (max-width: 480px) {
@@ -382,7 +428,6 @@ $spaces: (
         max-width: 100%;
         margin: 0 auto;
         text-align: center;
-        padding-bottom: 16px;
         position: relative;
         display: block;
         cursor: pointer;
@@ -435,16 +480,16 @@ $spaces: (
         cursor: pointer;
         position: relative;
 
-         &:hover {
-    background-color: #ffffff; // card background becomes white
+        &:hover {
+            //background-color: $color-primary; // card background becomes white
 
-    // Target heading and paragraph inside hovered card
-    .card-heading,
-    .card-paragraph {
-      color: #000000;          // text becomes black
-      background-color: #ffffff; // optional, keep background white
-    }
-  }
+            // Target heading and paragraph inside hovered card
+            .card-heading,
+            .card-paragraph {
+                color: $bg-primary; // text becomes black
+                background-color: $color-primary; // optional, keep background white
+            }
+        }
 
 
         &-image {
@@ -481,14 +526,6 @@ $spaces: (
             &:active::after {
                 opacity: 1;
             }
-
-             &.is-hover::after,
-            &.is-active::after {
-                background-color: red;
-              
-            }
-
-
         }
 
         .card-heading {
@@ -503,17 +540,11 @@ $spaces: (
                 left: 0;
                 height: 2px;
                 width: 0;
-                background-color: white;
+                background-color: $color-primary;
                 transition: width 0.3s ease-in-out;
             }
 
-            &.is-hover::after,
-            &.is-active::after {
-                background-color: red;
-                width: 100%;
-            }
         }
 
     }
 }
-
