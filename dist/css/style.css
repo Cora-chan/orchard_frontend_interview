@@ -427,6 +427,14 @@ p.p--caption {
   cursor: pointer;
   position: relative;
 }
+.card-block__card:hover {
+  background-color: #ffffff;
+}
+.card-block__card:hover .card-heading,
+.card-block__card:hover .card-paragraph {
+  color: #000000;
+  background-color: #ffffff;
+}
 .card-block__card-image {
   position: relative;
   overflow: hidden;
@@ -456,21 +464,25 @@ p.p--caption {
 .card-block__card-image:hover::after, .card-block__card-image:active::after {
   opacity: 1;
 }
-.card-block__card #card-heading {
+.card-block__card-image.is-hover::after, .card-block__card-image.is-active::after {
+  background-color: red;
+}
+.card-block__card .card-heading {
   position: relative;
   display: inline-block;
   cursor: pointer;
 }
-.card-block__card #card-heading::after {
+.card-block__card .card-heading::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   height: 2px;
   width: 0;
-  background-color: #fff;
+  background-color: white;
   transition: width 0.3s ease-in-out;
 }
-.card-block__card #card-heading.is-hover::after, .card-block__card #card-heading.is-active::after {
+.card-block__card .card-heading.is-hover::after, .card-block__card .card-heading.is-active::after {
+  background-color: red;
   width: 100%;
 }

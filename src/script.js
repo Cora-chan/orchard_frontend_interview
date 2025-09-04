@@ -68,61 +68,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (cardBlockData && cardBlockData.length) {
         cardBlockData.forEach((card, index) => {
-          // Use <a> as the clickable card container
           const cardEl = document.createElement('a');
           cardEl.classList.add('card-block__card','margin-bottom-lg');
-          cardEl.href = card.link || "#"; // Use real link if available, otherwise "#"
+          cardEl.href = card.link || "#"; // focusable by default
 
-          // Unique heading ID
           const headingId = `card-heading-${index}`;
           const paragraphId = `card-paragraph-${index}`;
 
           cardEl.innerHTML = `
-            <div class="card-block__card-image ">
+            <div class="card-block__card-image">
               <img src="${card.image.src}" alt="${card.image.alt}" />
             </div>
             <p id="${headingId}" class="p--bold margin-top-lg margin-bottom-sm padding-left-lg padding-right-lg card-heading">
               ${card.heading}
             </p>
-            <p id="${paragraphId}" class="padding-left-lg padding-right-lg">${card.paragraph}</p>
+            <p id="${paragraphId}" class="padding-left-lg padding-right-lg padding-bottom-lg card-paragraph">${card.paragraph}</p>
           `;
 
           grid.appendChild(cardEl);
 
-          // Get this card's heading
-          const heading = cardEl.querySelector(`#${headingId}`);
-
-          // // Hover underline effect
-          // cardEl.addEventListener("mouseenter", () => heading.classList.add("is-hover"));
-          // console.log(heading.classList );
-          // cardEl.addEventListener("mouseleave", () => heading.classList.remove("is-hover"));
-          //    console.log(heading.classList );
-
-          // Click event
+          // Mouse click
           cardEl.addEventListener("click", (event) => {
-            event.preventDefault(); // Prevent navigation for testing
-            console.log("Card clicked:", cardEl); // ✅ Logs the <a> element
-          
+            event.preventDefault(); // prevent navigation for testing
+            console.log("Card clicked:", cardEl);
           });
 
-            cardEl.addEventListener("mouseenter", () => {
-          console.log("Card hover in");
-          
-          heading.classList.add("is-hover");
-          console.log("heading classlist", heading.classList);
+          // Keyboard access
+          cardEl.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault(); // prevent scrolling for Space
+              cardEl.click(); // trigger click event
+            }
+          });
         });
-
-        cardEl.addEventListener("mouseleave", () => {
-          console.log("Card hover out");
-          heading.classList.remove("is-hover");
-          console.log("heading classlist", heading.classList);
-        });
-      });
-        
       }
     })
     .catch(err => console.error("Error loading card block:", err));
 });
+
 
 
 

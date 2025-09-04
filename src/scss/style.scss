@@ -435,6 +435,17 @@ $spaces: (
         cursor: pointer;
         position: relative;
 
+         &:hover {
+    background-color: #ffffff; // card background becomes white
+
+    // Target heading and paragraph inside hovered card
+    .card-heading,
+    .card-paragraph {
+      color: #000000;          // text becomes black
+      background-color: #ffffff; // optional, keep background white
+    }
+  }
+
 
         &-image {
             position: relative;
@@ -471,10 +482,16 @@ $spaces: (
                 opacity: 1;
             }
 
+             &.is-hover::after,
+            &.is-active::after {
+                background-color: red;
+              
+            }
+
 
         }
 
-        #card-heading {
+        .card-heading {
             position: relative;
             display: inline-block;
             cursor: pointer;
@@ -486,12 +503,13 @@ $spaces: (
                 left: 0;
                 height: 2px;
                 width: 0;
-                background-color: $color-primary;
+                background-color: white;
                 transition: width 0.3s ease-in-out;
             }
 
             &.is-hover::after,
             &.is-active::after {
+                background-color: red;
                 width: 100%;
             }
         }
