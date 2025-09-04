@@ -481,8 +481,6 @@ $spaces: (
         position: relative;
 
         &:hover {
-            //background-color: $color-primary; // card background becomes white
-
             // Target heading and paragraph inside hovered card
             .card-heading,
             .card-paragraph {
@@ -545,6 +543,5 @@ $spaces: (
             }
 
         }
-
     }
 }
