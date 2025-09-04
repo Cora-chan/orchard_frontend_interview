@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  axios.get('http://localhost:5500/gallery')
+  axios.get('/data/gallery.json')
     .then(res => {
       const gallery = res.data;
       console.log('Images after Axios:', document.querySelectorAll('.gallery__image-wrapper img'));
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  axios.get('http://localhost:5500/card-block')
+  axios.get('/data/cardBlock.json')
     .then(res => {
       const cardBlockData = res.data.cards;
       const grid = document.getElementById('card-block-grid');
