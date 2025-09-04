@@ -6,6 +6,12 @@
   font-family: $font-primary;
   background-color: $bg-primary;
 
+  // Make it fill the viewport and center all children
+  min-height: 100vh; // full viewport height
+  display: flex;
+  flex-direction: column; // stack components vertically
+  align-items: center;    // horizontal center
+
   // Modifiers for swapping tokens
   &--font-main {
     font-family: $font-primary;
@@ -26,6 +32,8 @@
     line-height: 1.1;
     letter-spacing: 1.5px;
     color: $color-primary;
+    margin: 0;
+    border-bottom: 1px solid $color-primary;
 }
 
 //Paragraph
@@ -37,17 +45,19 @@
     font-size: 21px;
     line-height: 1.43;
     letter-spacing: normal;
-    color: $color-primary
+    color: $color-primary;
+    margin: 0;
 }
 
 @mixin font-body-bold {
     /* Body/Bold */
     font-family: $font-primary;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 21px;
     line-height: 1.43;
     letter-spacing: normal;
     color: $color-primary;
+    margin: 0;
 }
 
 @mixin font-caption-normal {
@@ -58,7 +68,8 @@
     font-size: 15px;
     line-height: 1.4;
     letter-spacing: normal;
-    color: $color-accent
+    color: $color-accent;
+    margin: 0;
 }
 
 h1,
@@ -78,51 +89,240 @@ p{
     }
 }
 
-// gellery
+// Spacing utilities
+$spaces: (
+  lg: $space-lg,
+  sm: $space-sm
+);
+
+@each $size, $value in $spaces {
+  .margin-top-#{$size}    { margin-top: $value; }
+  .margin-right-#{$size}  { margin-right: $value; }
+  .margin-bottom-#{$size} { margin-bottom: $value; }
+  .margin-left-#{$size}   { margin-left: $value; }
+
+  .padding-top-#{$size}    { padding-top: $value; }
+  .padding-right-#{$size}  { padding-right: $value; }
+  .padding-bottom-#{$size} { padding-bottom: $value; }
+  .padding-left-#{$size}   { padding-left: $value; }
+}
+
+
+// Keyframes for fade in/out
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-10px); }
+}
 
 .gallery {
   display: flex;
   gap: 2rem;
   align-items: flex-start;
+  flex-wrap: wrap; // allow wrapping on smaller screens
+
+  // Fade in by default
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+
+  // Optional fade-out state
+  &.is-fading-out {
+    animation: fadeOut 1s ease forwards;
+  }
 
   &__images {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap; // wrap images on smaller screens
   }
 
   &__column {
-    &--left {
-      flex-shrink: 0;
-
-      img {
-        width: 372px;
-        height: auto;
-        display: block;
-        object-fit: cover;
-      }
-    }
-
+    &--left,
     &--right {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
 
-      img {
-        width: 372px;
-        height: auto;
-        display: block;
-        object-fit: cover;
+      .gallery__image-wrapper {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+
+        img {
+          width: 100%;
+          max-width: 372px;
+          height: auto;
+          display: block;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(255, 255, 255, 0.25);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none; // allow clicks to pass through
+        }
+
+        &:hover img,
+        &:active img {
+          transform: scale(1.05);
+        }
+
+        &:hover::after,
+        &:active::after {
+          opacity: 1;
+        }
       }
     }
   }
 
   &__content {
-    max-width: 500px;
+    max-width: 362px;
 
     &-heading {
       margin-top: 0;
-    
+    }
+  }
+
+  /* Tablet breakpoint (≤ 768px) */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    &__images {
+      justify-content: center;
     }
 
+    &__column {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      .gallery__image-wrapper img {
+        max-width: 45vw; // two images per row approx
+      }
+    }
+
+    &__content {
+      max-width: 90%;
+      text-align: center;
+    }
+  }
+
+  /* Mobile breakpoint (≤ 320px) */
+@media (max-width: 320px) {
+  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+
+  &__images {
+    display: flex;
+    flex-direction: column; // force single column
+    gap: 1rem;
+  }
+
+  &__column {
+    flex-direction: column;
+    width: 100%;
+
+    .gallery__image-wrapper {
+      width: 100%;
+      max-width: 100%;
+
+      img {
+        width: 100%; // full width of container
+        max-width: none;
+      }
+    }
+  }
+
+  &__content {
+    max-width: 100%;
+    padding: 0 1rem;
+    text-align: center;
   }
 }
+
+}
+
+/* Modal overlay */
+.modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7); /* transparent overlay */
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Show modal when active */
+.modal.is-active {
+  display: flex;
+}
+
+/* Modal image */
+.modal__content {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+}
+
+/* Close button */
+.modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10000;
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+  .modal__content {
+    max-width: 95%;
+    max-height: 75%;
+  }
+  .modal__close {
+    font-size: 1.8rem;
+    top: 0.5rem;
+    right: 1rem;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 320px) {
+  .modal__content {
+    max-width: 100%;
+    max-height: 70%;
+  }
+  .modal__close {
+    font-size: 1.5rem;
+    top: 0.25rem;
+    right: 0.75rem;
+  }
+}
+

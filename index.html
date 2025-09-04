@@ -15,32 +15,43 @@
 </head>
 
 <body class="theme theme--bg-primary">
-  <header>
+  <!-- <header>
     <h1>Your Heading Text</h1>
-  </header>
+  </header> -->
 
   <main>
-
-    <section class="gallery">
-      <div class="gallery__images">
-        <div class="gallery__column gallery__column--left">
-          <img src="assets/img/gallery_cook/left.png" alt="Vertical image">
-        </div>
-        <div class="gallery__column gallery__column--right">
-          <img src="assets/img/gallery_kitchen/right-top.png" alt="Top right image">
-          <img src="assets/img/gallery_eggs/right-bottom.png" alt="Bottom right image">
-        </div>
-      </div>
-
-      <div class="gallery__content">
-        <h1 class="gallery__content-heading">Gallery Heading</h2>
-        <p class="gallery__content-text">
-          This is a descriptive paragraph about the gallery. You can highlight
-          the purpose of the images, tell a story, or provide context for the
-          visuals shown on the left.
-        </p>
-      </div>
-    </section>
+   
+     
+        <section class="gallery">
+          <div class="gallery__images">
+            <div class="gallery__column gallery__column--left">
+               <div class="gallery__image-wrapper">
+                 <img id="gallery-image-left" src="" alt="">
+               </div>
+            </div>
+            <div class="gallery__column gallery__column--right">
+               <div class="gallery__image-wrapper">
+                 <img id="gallery-image-top" src="" alt="">
+               </div>
+               <div class="gallery__image-wrapper">
+                 <img id="gallery-image-bottom" src="" alt="">
+               </div>
+            </div>
+          </div>
+          <div class="gallery__content">
+            <h1 id="gallery-heading" class="padding-bottom-lg gallery__content-border"></h1>
+            <p id="gallery-paragraph" class="padding-top-lg"></p>
+            <p id="gallery-caption" class="p--caption padding-top-lg gallery__content-border"></p>
+            <p id="gallery-suggestion" class="p--bold padding-top-sm"></p>
+          </div>
+          </section>
+      
+   
+<!-- Modal -->
+<div id="gallery-modal" class="modal">
+  <span class="modal__close">&times;</span>
+  <img class="modal__content" id="modal-image" alt="">
+</div>
 
 
   </main>
@@ -48,6 +59,8 @@
   <footer>
     <p>&copy; 2025 Your Company Name</p>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
