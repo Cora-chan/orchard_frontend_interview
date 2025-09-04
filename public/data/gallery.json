@@ -2,20 +2,20 @@
   "gallery": {
     "images": {
       "left": {
-        "src": "assets/img/gallery_cook/left.png",
+        "src": "public/assets/img/gallery_cook/left.png",
         "alt": "Tall vertical showcase image",
-        "modalSrc": "assets/img/gallery_cook/left@3x.png"
+        "modalSrc": "public/assets/img/gallery_cook/left@3x.png"
       },
       "right": [
         {
-          "src": "assets/img/gallery_kitchen/right-top.png",
+          "src": "public/assets/img/gallery_kitchen/right-top.png",
           "alt": "Top right supporting image",
-          "modalSrc": "assets/img/gallery_kitchen/right-top@3x.png"
+          "modalSrc": "public/assets/img/gallery_kitchen/right-top@3x.png"
         },
         {
-          "src": "assets/img/gallery_eggs/right-bottom.png",
+          "src": "public/assets/img/gallery_eggs/right-bottom.png",
           "alt": "Bottom right supporting image",
-          "modalSrc": "assets/img/gallery_eggs/right-bottom@3x.png"
+          "modalSrc": "public/assets/img/gallery_eggs/right-bottom@3x.png"
         }
       ]
     },
