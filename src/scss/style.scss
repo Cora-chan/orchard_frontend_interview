@@ -1,31 +1,26 @@
-
 @use 'variables' as *; // SCSS module import (Dart Sass syntax)
 
 // Base theme block
 .theme {
-  font-family: $font-primary;
-  background-color: $bg-primary;
-
-  // Make it fill the viewport and center all children
-  min-height: 100vh; // full viewport height
-  display: flex;
-  flex-direction: column; // stack components vertically
-  align-items: center;    // horizontal center
-
-  // Modifiers for swapping tokens
-  &--font-main {
     font-family: $font-primary;
-  }
-
-  &--bg-main {
     background-color: $bg-primary;
-  }
+
+    min-height: 100vh; // full viewport height
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &--font-main {
+        font-family: $font-primary;
+    }
+
+    &--bg-main {
+        background-color: $bg-primary;
+    }
 }
 
-//Heading
-
+// Heading
 @mixin font-heading1-light {
-    /* Heading 1/Light */
     font-family: $font-primary;
     font-weight: 300;
     font-size: 30px;
@@ -36,10 +31,8 @@
     border-bottom: 1px solid $color-primary;
 }
 
-//Paragraph
-
+// Paragraphs
 @mixin font-body-regular {
-    /* Body/Regular */
     font-family: $font-primary;
     font-weight: 300;
     font-size: 21px;
@@ -50,18 +43,16 @@
 }
 
 @mixin font-body-bold {
-    /* Body/Bold */
     font-family: $font-primary;
     font-weight: bold;
     font-size: 21px;
     line-height: 1.43;
     letter-spacing: normal;
     color: $color-primary;
-    margin: 0;
+
 }
 
 @mixin font-caption-normal {
-    /* Caption/Normal */
     font-family: $font-primary;
     font-style: normal;
     font-weight: bold;
@@ -72,12 +63,29 @@
     margin: 0;
 }
 
+a {
+  color: $color-primary;
+  text-decoration: none;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+
+  &:hover,
+  &:focus {
+    color: $color-primary;
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: darken($color-primary, 10%);
+  }
+}
+
+
 h1,
 .h1 {
     @include font-heading1-light;
 }
 
-p{
+p {
     @include font-body-regular;
 
     &.p--bold {
@@ -91,238 +99,403 @@ p{
 
 // Spacing utilities
 $spaces: (
-  lg: $space-lg,
-  sm: $space-sm
+    lg: $space-lg,
+    sm: $space-sm,
+    xxl: $space-xxl
 );
 
 @each $size, $value in $spaces {
-  .margin-top-#{$size}    { margin-top: $value; }
-  .margin-right-#{$size}  { margin-right: $value; }
-  .margin-bottom-#{$size} { margin-bottom: $value; }
-  .margin-left-#{$size}   { margin-left: $value; }
+    .margin-top-#{$size} {
+        margin-top: $value;
+    }
 
-  .padding-top-#{$size}    { padding-top: $value; }
-  .padding-right-#{$size}  { padding-right: $value; }
-  .padding-bottom-#{$size} { padding-bottom: $value; }
-  .padding-left-#{$size}   { padding-left: $value; }
+    .margin-right-#{$size} {
+        margin-right: $value;
+    }
+
+    .margin-bottom-#{$size} {
+        margin-bottom: $value;
+    }
+
+    .margin-left-#{$size} {
+        margin-left: $value;
+    }
+
+    .padding-top-#{$size} {
+        padding-top: $value;
+    }
+
+    .padding-right-#{$size} {
+        padding-right: $value;
+    }
+
+    .padding-bottom-#{$size} {
+        padding-bottom: $value;
+    }
+
+    .padding-left-#{$size} {
+        padding-left: $value;
+    }
 }
 
-
-// Keyframes for fade in/out
+// Animations
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fadeOut {
-  from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(-10px); }
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
 }
 
 .gallery {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-  flex-wrap: wrap; // allow wrapping on smaller screens
-
-  // Fade in by default
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
-
-  // Optional fade-out state
-  &.is-fading-out {
-    animation: fadeOut 1s ease forwards;
-  }
-
-  &__images {
     display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap; // wrap images on smaller screens
-  }
+    gap: 32px;
+    align-items: flex-start;
+    flex-wrap: wrap;
 
-  &__column {
-    &--left,
-    &--right {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1000ms ease forwards;
 
-      .gallery__image-wrapper {
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-
-        img {
-          width: 100%;
-          max-width: 372px;
-          height: auto;
-          display: block;
-          object-fit: cover;
-          transition: transform 0.3s ease;
-        }
-
-        &::after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(255, 255, 255, 0.25);
-          opacity: 0;
-          transition: opacity 0.3s ease;
-          pointer-events: none; // allow clicks to pass through
-        }
-
-        &:hover img,
-        &:active img {
-          transform: scale(1.05);
-        }
-
-        &:hover::after,
-        &:active::after {
-          opacity: 1;
-        }
-      }
+    &.is-fading-out {
+        animation: fadeOut 1000ms ease forwards;
     }
-  }
-
-  &__content {
-    max-width: 362px;
-
-    &-heading {
-      margin-top: 0;
-    }
-  }
-
-  /* Tablet breakpoint (≤ 768px) */
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
 
     &__images {
-      justify-content: center;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
     }
 
     &__column {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
 
-      .gallery__image-wrapper img {
-        max-width: 45vw; // two images per row approx
-      }
+        &--left,
+        &--right {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .gallery__image-wrapper {
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+
+                img {
+                    width: 100%;
+                    max-width: 372px;
+                    height: auto;
+                    display: block;
+                    object-fit: cover;
+                    transition: transform 300ms ease;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(255, 255, 255, 0.25);
+                    opacity: 0;
+                    transition: opacity 300ms ease;
+                    pointer-events: none; // allow clicks to pass through
+                }
+
+                &:hover img,
+                &:active img {
+                    transform: scale(1.05);
+                }
+
+                &:hover::after,
+                &:active::after {
+                    opacity: 1;
+                }
+            }
+        }
     }
 
     &__content {
-      max-width: 90%;
-      text-align: center;
+        max-width: 362px;
+
+        &-heading {
+            margin-top: 0;
+        }
     }
-  }
 
-  /* Mobile breakpoint (≤ 320px) */
-@media (max-width: 320px) {
-  gap: 1rem;
-  flex-direction: column;
-  align-items: center;
+    /* Tablet breakpoint (≤ 768px) */
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
 
-  &__images {
-    display: flex;
-    flex-direction: column; // force single column
-    gap: 1rem;
-  }
+        &__images {
+            justify-content: center;
+        }
 
-  &__column {
-    flex-direction: column;
-    width: 100%;
+        &__column {
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
 
-    .gallery__image-wrapper {
-      width: 100%;
-      max-width: 100%;
+            .gallery__image-wrapper img {
+                max-width: 45vw;
+            }
+        }
 
-      img {
-        width: 100%; // full width of container
-        max-width: none;
-      }
+        &__content {
+            max-width: 90%;
+            text-align: center;
+        }
     }
-  }
 
-  &__content {
-    max-width: 100%;
-    padding: 0 1rem;
-    text-align: center;
-  }
-}
+    /* Mobile breakpoint (320px – 480px) */
+    @media (min-width: 320px) and (max-width: 480px) {
+        gap: 16px;
+        flex-direction: column;
+        align-items: center;
 
+        &__images {
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        &__column {
+            flex-direction: column;
+            width: 100%;
+
+            .gallery__image-wrapper {
+                width: 100%;
+                max-width: 100%;
+
+                img {
+                    width: 100%;
+                    max-width: none;
+                }
+            }
+        }
+
+        &__content {
+            max-width: 100%;
+            padding: 0 16px;
+            text-align: center;
+        }
+    }
 }
 
 /* Modal overlay */
 .modal {
-  display: none; /* hidden by default */
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.7); /* transparent overlay */
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
 }
 
-/* Show modal when active */
 .modal.is-active {
-  display: flex;
+    display: flex;
 }
 
-/* Modal image */
 .modal__content {
-  max-width: 90%;
-  max-height: 80%;
-  border-radius: 4px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  object-fit: contain;
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
 }
 
-/* Close button */
 .modal__close {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  color: #fff;
-  font-size: 2rem;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-  z-index: 10000;
+    position: absolute;
+    top: 48px;
+    right: 48px;
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10000;
 }
 
 /* Tablet adjustments */
 @media (max-width: 768px) {
-  .modal__content {
-    max-width: 95%;
-    max-height: 75%;
-  }
-  .modal__close {
-    font-size: 1.8rem;
-    top: 0.5rem;
-    right: 1rem;
-  }
+    .modal__content {
+        max-width: 95%;
+        max-height: 75%;
+    }
+
+    .modal__close {
+        font-size: 28px;
+        top: 8px;
+        right: 16px;
+    }
 }
 
-/* Mobile adjustments */
-@media (max-width: 320px) {
-  .modal__content {
-    max-width: 100%;
-    max-height: 70%;
-  }
-  .modal__close {
-    font-size: 1.5rem;
-    top: 0.25rem;
-    right: 0.75rem;
-  }
+/* Mobile adjustments (320px – 480px) */
+@media (min-width: 320px) and (max-width: 480px) {
+    .modal__content {
+        max-width: 100%;
+        max-height: 70%;
+    }
+
+    .modal__close {
+        font-size: 24px;
+        top: 16px;
+        right: 16px;
+    }
+
+    .modal {
+        padding: 0;
+    }
+}
+
+.card-block {
+    width: 100%;
+    max-width: 1200px;
+    opacity: 0; // start hidden
+    overflow: hidden;
+    animation: fadeIn 1000ms ease forwards; // same as gallery
+
+    #card-block-heading {
+        width: 315px;
+        max-width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        padding-bottom: 16px;
+        position: relative;
+        display: block;
+        cursor: pointer;
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 0; // start hidden
+            background-color: $color-primary; // use your theme color
+            transition: width 0.3s ease;
+        }
+
+        &.is-active::after,
+        &.is-hover::after {
+            width: 100%; // slide in underline
+        }
+
+        @media (max-width: 480px) {
+            width: 90%;
+            font-size: 24px;
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            width: 250px;
+            font-size: 26px;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(auto-fit, minmax(372px, 1fr)); // ✅ match gallery width dynamically
+
+        @media (max-width: 480px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card {
+        max-width: 372px; // ✅ same as gallery image
+        width: 100%;
+        //margin: 0 auto; // center each card in its column
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+
+
+        &-image {
+            position: relative;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.25);
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                pointer-events: none;
+            }
+
+            &:hover img,
+            &:active img {
+                transform: scale(1.05);
+            }
+
+            &:hover::after,
+            &:active::after {
+                opacity: 1;
+            }
+
+
+        }
+
+        #card-heading {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 2px;
+                width: 0;
+                background-color: $color-primary;
+                transition: width 0.3s ease-in-out;
+            }
+
+            &.is-hover::after,
+            &.is-active::after {
+                width: 100%;
+            }
+        }
+
+    }
 }
 

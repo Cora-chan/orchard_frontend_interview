@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="What does cooking mean? Is it simply applying heat to a food product">
   <meta name="keywords" content="cooking, recipe, food">
-  <title>Your Page Title | Brand Name</title>
+  <title>Yue's demo | Orchard</title>
 
   <!-- Open Sans from Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
@@ -20,47 +20,53 @@
   </header> -->
 
   <main>
-   
-     
-        <section class="gallery">
-          <div class="gallery__images">
-            <div class="gallery__column gallery__column--left">
-               <div class="gallery__image-wrapper">
-                 <img id="gallery-image-left" src="" alt="">
-               </div>
-            </div>
-            <div class="gallery__column gallery__column--right">
-               <div class="gallery__image-wrapper">
-                 <img id="gallery-image-top" src="" alt="">
-               </div>
-               <div class="gallery__image-wrapper">
-                 <img id="gallery-image-bottom" src="" alt="">
-               </div>
-            </div>
-          </div>
-          <div class="gallery__content">
-            <h1 id="gallery-heading" class="padding-bottom-lg gallery__content-border"></h1>
-            <p id="gallery-paragraph" class="padding-top-lg"></p>
-            <p id="gallery-caption" class="p--caption padding-top-lg gallery__content-border"></p>
-            <p id="gallery-suggestion" class="p--bold padding-top-sm"></p>
-          </div>
-          </section>
-      
-   
-<!-- Modal -->
-<div id="gallery-modal" class="modal">
-  <span class="modal__close">&times;</span>
-  <img class="modal__content" id="modal-image" alt="">
-</div>
 
+
+    <section class="gallery margin-top-xxl margin-bottom-xxl">
+      <div class="gallery__images">
+        <div class="gallery__column gallery__column--left">
+          <div class="gallery__image-wrapper">
+            <img id="gallery-image-left" src="" alt="">
+          </div>
+        </div>
+        <div class="gallery__column gallery__column--right">
+          <div class="gallery__image-wrapper">
+            <img id="gallery-image-top" src="" alt="">
+          </div>
+          <div class="gallery__image-wrapper">
+            <img id="gallery-image-bottom" src="" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="gallery__content">
+        <h1 id="gallery-heading" class="padding-bottom-lg gallery__content-border"></h1>
+        <p id="gallery-paragraph" class="padding-top-lg"></p>
+        <p id="gallery-caption" class="p--caption padding-top-lg gallery__content-border"></p>
+        <p id="gallery-suggestion" class="p--bold padding-top-sm"></p>
+      </div>
+    </section>
+
+
+    <!-- Modal -->
+    <div id="gallery-modal" class="modal">
+      <span class="modal__close">&times;</span>
+      <img class="modal__content" id="modal-image" alt="">
+    </div>
+
+    <section id="card-block" class="card-block padding-top-xxl margin-bottom-xxl">
+      <h1 id="card-block-heading" class="padding-bottom-lg "></h1>
+      <div class="card-block__grid padding-top-lg padding-bottom-lg" id="card-block-grid" c>
+        <!-- Cards will be generated via JS -->
+      </div>
+    </section>
 
   </main>
 
   <footer>
-    <p>&copy; 2025 Your Company Name</p>
+    <p>&copy; 2025 Made by Yue</p>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="script.js"></script>
+  <script src="./src/script.js"></script>
 </body>
 
 </html>
