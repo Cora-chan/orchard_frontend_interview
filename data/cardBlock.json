@@ -3,17 +3,17 @@
     "heading": "TASTE THE COLOURS",
     "cards": [
       {
-        "image": {"src": "public/assets/img/card_block_red/red.png","alt":"red color spoon"},
+        "image": {"src": "/assets/img/card_block_red/red.png","alt":"red color spoon"},
         "heading": "RED",
         "paragraph": "Red foods remind us of berries and soft fruits, so we anticipate a sweet taste."
       },
       {
-        "image": {"src": "public/assets/img/card_block_green/green.png","alt":"green color spoon"},
+        "image": {"src": "/assets/img/card_block_green/green.png","alt":"green color spoon"},
         "heading": "GREEN",
         "paragraph": " Fresh, zingy green colours are reminiscent of unripe fruit, promising sour or acid flavours"
       },
       {
-        "image": {"src": "public/assets/img/card_block_white/white.png","alt":"white color spoon"},
+        "image": {"src": "/assets/img/card_block_white/white.png","alt":"white color spoon"},
         "heading": "WHITE",
         "paragraph": "White foods evoke memories of salt and salty falvours, driving the expectation of a savoury treat"
       }
