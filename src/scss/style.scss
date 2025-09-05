@@ -491,9 +491,9 @@ $spaces: (
             .card-heading,
             .card-paragraph {
                 color: $bg-primary; // text becomes black
-                border: 1px solid $color-primary; // add border
                 background-color: $color-primary; // optional, keep background white
             }
+
         }
 
         &-image {

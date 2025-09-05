@@ -471,7 +471,6 @@ p.p--caption {
 .card-block__card:hover .card-heading,
 .card-block__card:hover .card-paragraph {
   color: #000;
-  border: 1px solid #fff;
   background-color: #fff;
 }
 .card-block__card-image {
