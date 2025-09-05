@@ -34,7 +34,7 @@ h1,
   font-size: 30px;
   line-height: 1.1;
   letter-spacing: 1.5px;
-  animation: lights 5s 750ms linear infinite;
+  color: #fff;
   margin: 0;
   border-bottom: 1px solid #fff;
 }
@@ -455,7 +455,6 @@ p.p--caption {
   }
 }
 .card-block__card {
-  max-width: 372px;
   width: 100%;
   overflow: hidden;
   display: flex;
@@ -464,9 +463,15 @@ p.p--caption {
   cursor: pointer;
   position: relative;
 }
+@media (min-width: 480px) {
+  .card-block__card {
+    max-width: 372px;
+  }
+}
 .card-block__card:hover .card-heading,
 .card-block__card:hover .card-paragraph {
   color: #000;
+  border: 1px solid #fff;
   background-color: #fff;
 }
 .card-block__card-image {
@@ -512,27 +517,4 @@ p.p--caption {
   width: 0;
   background-color: #fff;
   transition: width 0.3s ease-in-out;
-}
-
-@keyframes lights {
-  0% {
-    color: hsl(230, 40%, 80%);
-    text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.2), 0 0 0.125em hsla(320, 100%, 60%, 0.3), -1em -0.125em 0.5em hsla(40, 100%, 60%, 0), 1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
-  }
-  30% {
-    color: hsl(230, 80%, 90%);
-    text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.5), 0 0 0.125em hsla(320, 100%, 60%, 0.5), -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2), 0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
-  }
-  40% {
-    color: hsl(230, 100%, 95%);
-    text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.5), 0 0 0.125em hsla(320, 100%, 90%, 0.5), -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2), 0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
-  }
-  70% {
-    color: hsl(230, 80%, 90%);
-    text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.5), 0 0 0.125em hsla(320, 100%, 60%, 0.5), 0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2), -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
-  }
-  100% {
-    color: hsl(230, 40%, 80%);
-    text-shadow: 0 0 1em hsla(320, 100%, 50%, 0.2), 0 0 0.125em hsla(320, 100%, 60%, 0.3), 1em -0.125em 0.5em hsla(40, 100%, 60%, 0), -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
-  }
 }

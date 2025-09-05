@@ -26,7 +26,7 @@
     font-size: 30px;
     line-height: 1.1;
     letter-spacing: 1.5px;
-    animation: lights 5s 750ms linear infinite;
+    color:$color-primary;
     margin: 0;
     border-bottom: 1px solid $color-primary;
 }
@@ -472,7 +472,7 @@ $spaces: (
     }
 
     &__card {
-        max-width: 372px; // ✅ same as gallery image
+        
         width: 100%;
         //margin: 0 auto; // center each card in its column
         overflow: hidden;
@@ -482,15 +482,19 @@ $spaces: (
         cursor: pointer;
         position: relative;
 
+         @media (min-width: 480px) {
+            max-width: 372px;
+        }
+
         &:hover {
             // Target heading and paragraph inside hovered card
             .card-heading,
             .card-paragraph {
                 color: $bg-primary; // text becomes black
+                border: 1px solid $color-primary; // add border
                 background-color: $color-primary; // optional, keep background white
             }
         }
-
 
         &-image {
             position: relative;
@@ -547,53 +551,4 @@ $spaces: (
     }
 }
 
-// heading animation
-
-@keyframes lights {
-  0% {
-    color: hsl(230, 40%, 80%);
-    text-shadow:
-      0 0 1em hsla(320, 100%, 50%, 0.2),
-      0 0 0.125em hsla(320, 100%, 60%, 0.3),
-      -1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
-      1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
-  }
-  
-  30% { 
-    color: hsl(230, 80%, 90%);
-    text-shadow:
-      0 0 1em hsla(320, 100%, 50%, 0.5),
-      0 0 0.125em hsla(320, 100%, 60%, 0.5),
-      -0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
-      0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
-  }
-  
-  40% { 
-    color: hsl(230, 100%, 95%);
-    text-shadow:
-      0 0 1em hsla(320, 100%, 50%, 0.5),
-      0 0 0.125em hsla(320, 100%, 90%, 0.5),
-      -0.25em -0.125em 0.125em hsla(40, 100%, 60%, 0.2),
-      0.25em 0.125em 0.125em hsla(200, 100%, 60%, 0.4);
-  }
-  
-  70% {
-    color: hsl(230, 80%, 90%);
-    text-shadow:
-      0 0 1em hsla(320, 100%, 50%, 0.5),
-      0 0 0.125em hsla(320, 100%, 60%, 0.5),
-      0.5em -0.125em 0.25em hsla(40, 100%, 60%, 0.2),
-      -0.5em 0.125em 0.25em hsla(200, 100%, 60%, 0.4);
-  }
-  
-  100% {
-    color: hsl(230, 40%, 80%);
-    text-shadow:
-      0 0 1em hsla(320, 100%, 50%, 0.2),
-      0 0 0.125em hsla(320, 100%, 60%, 0.3),
-      1em -0.125em 0.5em hsla(40, 100%, 60%, 0),
-      -1em 0.125em 0.5em hsla(200, 100%, 60%, 0);
-  }
-  
-}
 
