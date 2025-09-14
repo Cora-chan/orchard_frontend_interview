@@ -355,7 +355,6 @@ $spaces: (
 /* Desktop: keep arrows floating left/right of image */
 @media (min-width: 769px) {
   .modal__image-wrapper {
-    flex-direction: row; /* Reset to row layout for desktop */
     justify-content: center;
     max-width: 75vw;
     max-height: 75vh;
