@@ -13,9 +13,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-
   <link rel="stylesheet" href="dist/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
 </head>
 
 <body class="theme theme--bg-primary">
@@ -40,17 +41,27 @@
       </div>
       <div class="gallery__content">
         <h1 id="gallery-heading" class="padding-bottom-lg gallery__content-border"></h1>
-        <p id="gallery-paragraph" class="padding-top-lg"></p>
-        <p id="gallery-caption" class="p--caption padding-top-lg gallery__content-border"></p>
-        <p id="gallery-suggestion" class="p--bold padding-top-sm"></p>
+        <p id="gallery-paragraph" class=""></p>
       </div>
     </section>
 
 
     <!-- Modal -->
     <div id="gallery-modal" class="modal">
-      <span class="modal__close">&times;</span>
-      <img class="modal__content" id="modal-image" alt="">
+      <span class="modal__close"><i class="fa-solid fa-xmark"></i></span>
+
+      <!-- Image container with navigation buttons -->
+      <div class="modal__image-wrapper">
+        
+        <img class="modal__content" id="modal-image" alt="">
+        <div class="modal__nav-container">
+        <button class="modal__nav modal__nav--prev"><i class="fa-solid fa-arrow-left"></i></button>
+        <button class="modal__nav modal__nav--next"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Thumbnails container -->
+      <div id="modal-thumbnails" class="modal__thumbnails"></div>
     </div>
 
     <!-- Card Block Section -->

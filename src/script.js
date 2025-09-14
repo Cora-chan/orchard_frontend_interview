@@ -12,9 +12,7 @@ function loadGallery() {
 
 function populateGalleryContent(content) {
   document.getElementById("gallery-heading").textContent = content.heading;
-  document.getElementById("gallery-paragraph").textContent = content.paragraph;
-  document.getElementById("gallery-caption").textContent = content.caption;
-  document.getElementById("gallery-suggestion").textContent = content.suggestion;
+  document.getElementById("gallery-paragraph").innerHTML = content.paragraph;
 }
 
 function populateGalleryImages(images) {
@@ -37,32 +35,93 @@ function populateGalleryImages(images) {
 function setupModal() {
   const modal = document.getElementById("gallery-modal");
   const modalImg = document.getElementById("modal-image");
-  const closeBtn = document.querySelector(".modal__close");
-  const images = document.querySelectorAll(".gallery__image-wrapper img");
+  const closeBtn = modal.querySelector(".modal__close");
+  const thumbnailsContainer = document.getElementById("modal-thumbnails");
+  const prevBtn = modal.querySelector(".modal__nav--prev");
+  const nextBtn = modal.querySelector(".modal__nav--next");
+  const images = Array.from(document.querySelectorAll(".gallery__image-wrapper img"));
 
-  function openModal(src, alt) {
-    modalImg.src = src;
-    modalImg.alt = alt;
-    modal.classList.add("is-active", "fade-in");
-    modal.classList.remove("fade-out");
+  let currentIndex = 0;
+
+  // Build thumbnails dynamically
+  thumbnailsContainer.innerHTML = images
+    .map((img, index) => `
+      <img src="${img.src}" 
+           data-index="${index}" 
+           alt="${img.alt}">
+    `)
+    .join("");
+
+  const thumbnails = thumbnailsContainer.querySelectorAll("img");
+
+  function openModal(index) {
+    currentIndex = index;
+    updateModalImage();
+    modal.classList.add("is-active");
+    modal.classList.remove("is-closing");
   }
 
   function closeModal() {
-    modal.classList.add("fade-out");
-    modal.classList.remove("fade-in");
-    setTimeout(() => modal.classList.remove("is-active"), 200); // match CSS transition time
+    modal.classList.add("is-closing");
+    modal.classList.remove("is-active");
+    setTimeout(() => modal.classList.remove("is-closing"), 300); // matches fade-out animation
   }
 
-  images.forEach((img) => {
-    img.addEventListener("click", () =>
-      openModal(img.dataset.modalSrc || img.src, img.alt)
-    );
+  function updateModalImage() {
+    const img = images[currentIndex];
+    modalImg.src = img.dataset.modalSrc || img.src;
+    modalImg.alt = img.alt;
+
+    // Highlight active thumbnail
+    thumbnails.forEach((thumb) => thumb.classList.remove("active"));
+    thumbnails[currentIndex].classList.add("active");
+  }
+
+  function showNext() {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateModalImage();
+  }
+
+  function showPrev() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateModalImage();
+  }
+
+  // Event listeners
+  images.forEach((img, index) => {
+    img.addEventListener("click", () => openModal(index));
+  });
+
+  thumbnails.forEach((thumb) => {
+    thumb.addEventListener("click", () => openModal(Number(thumb.dataset.index)));
   });
 
   closeBtn.addEventListener("click", closeModal);
-  modal.addEventListener("click", (e) => e.target === modal && closeModal());
-  document.addEventListener("keydown", (e) => e.key === "Escape" && closeModal());
+  prevBtn.addEventListener("click", showPrev);
+  nextBtn.addEventListener("click", showNext);
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("is-active")) return;
+    if (e.key === "Escape") closeModal();
+    if (e.key === "ArrowRight") showNext();
+    if (e.key === "ArrowLeft") showPrev();
+  });
+
+  // Swipe support for mobile
+  let startX = 0;
+  modalImg.addEventListener("touchstart", (e) => (startX = e.touches[0].clientX));
+  modalImg.addEventListener("touchend", (e) => {
+    let endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) showNext();
+    if (endX - startX > 50) showPrev();
+  });
 }
+
+document.addEventListener("DOMContentLoaded", setupModal);
 
 function loadCardBlock() {
   axios.get("/data/cardBlock.json")
