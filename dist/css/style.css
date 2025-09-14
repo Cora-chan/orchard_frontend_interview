@@ -444,6 +444,13 @@ p.p--caption {
   animation: modalFadeOut 0.3s ease forwards;
 }
 
+.modal__caption {
+  text-align: center;
+  color: white;
+  margin-top: 8px;
+  font-size: 16px;
+}
+
 .modal__content {
   max-width: 80vw;
   max-height: 80vh;

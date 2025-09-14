@@ -36,6 +36,7 @@ function setupModal() {
   const modal = document.getElementById("gallery-modal");
   const modalImg = document.getElementById("modal-image");
   const closeBtn = modal.querySelector(".modal__close");
+  const caption = modal.querySelector(".modal__caption");
   const thumbnailsContainer = document.getElementById("modal-thumbnails");
   const prevBtn = modal.querySelector(".modal__nav--prev");
   const nextBtn = modal.querySelector(".modal__nav--next");
@@ -75,6 +76,8 @@ function setupModal() {
     // Highlight active thumbnail
     thumbnails.forEach((thumb) => thumb.classList.remove("active"));
     thumbnails[currentIndex].classList.add("active");
+
+    caption.textContent = currentIndex + 1 + " / " + images.length;
   }
 
   function showNext() {
@@ -85,6 +88,10 @@ function setupModal() {
   function showPrev() {
     currentIndex = (currentIndex - 1 + images.length) % images.length;
     updateModalImage();
+  }
+
+  function updateCaption() {
+    caption.textContent = currentIndex + 1 + " / " + images.length;
   }
 
   // Event listeners
