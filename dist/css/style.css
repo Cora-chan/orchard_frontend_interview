@@ -355,7 +355,6 @@ p.p--caption {
   .modal__image-wrapper {
     justify-content: center;
     max-width: 75vw;
-    max-height: 75vh;
   }
   .modal__nav {
     position: absolute;
@@ -447,8 +446,15 @@ p.p--caption {
 .modal__caption {
   text-align: center;
   color: white;
-  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 16px;
+}
+@media (max-width: 768px) {
+  .modal__caption {
+    margin-top: 16px;
+  }
 }
 
 .modal__content {

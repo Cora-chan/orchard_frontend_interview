@@ -357,7 +357,6 @@ $spaces: (
   .modal__image-wrapper {
     justify-content: center;
     max-width: 75vw;
-    max-height: 75vh;
   }
 
   .modal__nav {
@@ -464,8 +463,18 @@ $spaces: (
 .modal__caption {
   text-align: center;
   color: white;
-  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 16px;
+
+  @media (max-width: 768px) {
+    margin-top: 16px;
+  }
+
+
+
+
 }
 
 
